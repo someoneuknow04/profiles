@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Profile Templates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      background-color: #0f0f0f;
+      color: white;
+    }
+
+    header {
+      background-color: #111;
+      text-align: center;
+      padding: 60px 20px 30px;
+      border-bottom: 2px solid #f43f5e;
+    }
+
+    header h1 {
+      font-size: 36px;
+      color: #f43f5e;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    #searchInput {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 20px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 500px;
+      background: #1a1a1a;
+      color: white;
+      border: 2px solid #f43f5e;
+      border-radius: 12px;
+      outline: none;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 30px 20px;
+    }
+
+    .card {
+      background-color: #1c1c1c;
+      border: 2px solid #f43f5e;
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #f43f5e;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 40px 20px;
+    }
+
+    .modal-content {
+      background: #111;
+      max-width: 800px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 16px;
+      color: white;
+      position: relative;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+    }
+
+    .modal-content h2 {
+      color: #f43f5e;
+      margin-top: 0;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 28px;
+      color: #f43f5e;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .modal-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Business Profile Templates</h1>
+    <p>Search & view ready-made business profiles 🥷</p>
+  </header>
+
+  <input type="text" id="searchInput" placeholder="Search profiles by keyword...">
+
+  <div class="container" id="profileCards">
+    <!-- Cards will be added dynamically -->
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalContent" style="white-space: pre-wrap;"></p>
+    </div>
+  </div>
+
+  <script>
+    const profiles = [
+      {
+        title: "Retail Shop Profile",
+        content: `We are a well-established retail business selling clothing and accessories.
+Turnover: ₹25L/year
+Founded: 2017
+Key Strengths:
+- Prime Location
+- Loyal Customer Base`
+      },
+      {
+        title: "Construction Contractor",
+        content: `We undertake building and civil work projects in residential and commercial spaces.
+Clients: L&T, Mahindra Infra
+License No: CON7834
+Staff: 12 full-time workers`
+      },
+      {
+        title: "Photography Studio",
+        content: `Professional wedding and commercial photography services across Mumbai.
+Gear: Canon R5, DJI Drone
+Founded: 2015
+Instagram: @pixframe.pro`
+      }
+      // Add all your profiles here in the same format
+    ];
+
+    const container = document.getElementById('profileCards');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+    const searchInput = document.getElementById('searchInput');
+
+    function showProfiles(filter = '') {
+      container.innerHTML = '';
+      profiles.forEach(profile => {
+        if (
+          profile.title.toLowerCase().includes(filter.toLowerCase()) ||
+          profile.content.toLowerCase().includes(filter.toLowerCase())
+        ) {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = <h3>${profile.title}</h3>;
+          card.onclick = () => openModal(profile.title, profile.content);
+          container.appendChild(card);
+        }
+      });
+    }
+
+    function openModal(title, content) {
+      modalTitle.innerText = title;
+      modalContent.innerText = content;
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      showProfiles(e.target.value);
+    });
+
+    showProfiles(); // Initial render
+  </script>
+
+</body>
+</html>
