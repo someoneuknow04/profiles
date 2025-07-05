@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,20 +53,22 @@
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .profile:hover {
+      transform: scale(1.02);
     }
     .profile h3 {
       margin-top: 0;
       color: #f00;
-    }
-    .hidden {
-      display: none;
     }
   </style>
 </head>
 <body>
   <h1>Business Profile Templates</h1>
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search for Doctor, Restaurant, Salon...">
+    <input type="text" id="searchInput" placeholder="Search for a business profile...">
     <button onclick="searchProfiles()">Search</button>
   </div>
 
@@ -77,38 +78,34 @@
 
   <script>
     const profiles = [
-      {
-        title: "Doctor",
-        content: "Provides health check-ups, consultancy, medicine services, 20 patients daily, 50% profit margin, GST registered."
-      },
-      {
-        title: "Dentist",
-        content: "Offers root canal, wisdom tooth removal, cleaning, 2 employees, 50% profit, GST No: Available."
-      },
-      {
-        title: "Restaurant",
-        content: "Serves veg & non-veg food, 80+ daily customers, sitting for 120, 30 employees, 50% margin."
-      },
-      {
-        title: "Gym",
-        content: "Provides personal training, muscle gain, diet plans, 1200 clients, 4 trainers, 40% margin."
-      },
-      {
-        title: "Lawyer",
-        content: "Handles civil, family, documentation cases; 70+ active cases, 2 employees, 50% profit."
-      },
-      {
-        title: "Beauty Parlour",
-        content: "Offers makeup, hair styling, facials; 65% profit; 8 employees; service for locals."
-      },
-      {
-        title: "Freelancer",
-        content: "Works in software dev & tech consulting, charges per project, global clients, 80% profit."
-      },
-      {
-        title: "Event Management",
-        content: "Provides wedding, birthday, corporate events, 26 employees, 60% profit, variable charges."
-      }
+      { title: "Doctor", link: "doctor.html", content: "Doctor business template profile." },
+      { title: "Dentist", link: "dentist.html", content: "Dentist business template profile." },
+      { title: "Restaurant", link: "restaurant.html", content: "Restaurant business template profile." },
+      { title: "Gym", link: "gym.html", content: "Gym business template profile." },
+      { title: "Lawyer", link: "lawyer.html", content: "Lawyer business template profile." },
+      { title: "Beauty Parlour", link: "beauty-parlour.html", content: "Beauty Parlour business template profile." },
+      { title: "Freelancer", link: "freelancer.html", content: "Freelancer business template profile." },
+      { title: "Event Management", link: "event-management.html", content: "Event Management business template profile." },
+      { title: "Coaching Classes", link: "coaching-classes.html", content: "Coaching Classes business template profile." },
+      { title: "Photography", link: "photography.html", content: "Photography business template profile." },
+      { title: "General Store", link: "general-store.html", content: "General Store business template profile." },
+      { title: "LIC Agent", link: "lic-agent.html", content: "LIC Agent business template profile." },
+      { title: "Civil Contractor", link: "civil-contractor.html", content: "Civil Contractor business template profile." },
+      { title: "Electrician", link: "electrician.html", content: "Electrician business template profile." },
+      { title: "Tailor", link: "tailor.html", content: "Tailor business template profile." },
+      { title: "Cake Shop", link: "cake-shop.html", content: "Cake Shop business template profile." },
+      { title: "Flour Mill", link: "flour-mill.html", content: "Flour Mill business template profile." },
+      { title: "Fabrication", link: "fabrication.html", content: "Fabrication business template profile." },
+      { title: "Painter", link: "painting.html", content: "Painting business template profile." },
+      { title: "Actor", link: "actor.html", content: "Actor business template profile." },
+      { title: "Priest", link: "priest.html", content: "Priest business template profile." },
+      { title: "Auto Driver", link: "auto-driver.html", content: "Auto Driver business template profile." },
+      { title: "Hotel", link: "hotel.html", content: "Hotel business template profile." },
+      { title: "Laundry", link: "laundry.html", content: "Laundry business template profile." },
+      { title: "Tax Consultant", link: "tax-consultant.html", content: "Tax Consultant business template profile." },
+      { title: "Chartered Accountant", link: "chartered-accountant.html", content: "CA business template profile." },
+      { title: "Broadband", link: "broadband.html", content: "Broadband service business template profile." }
+      // (Add more as needed)
     ];
 
     const profileList = document.getElementById("profileList");
@@ -118,6 +115,7 @@
       data.forEach(p => {
         const div = document.createElement("div");
         div.className = "profile";
+        div.onclick = () => window.location.href = p.link;
         div.innerHTML = `<h3>${p.title}</h3><p>${p.content}</p>`;
         profileList.appendChild(div);
       });
@@ -132,7 +130,6 @@
       renderProfiles(filtered);
     }
 
-    // Render all on first load
     renderProfiles(profiles);
   </script>
 </body>
