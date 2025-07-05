@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Profiles | Shadow Ninja Templates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Manrope', sans-serif;
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: #111;
+      color: #eee;
+    }
+    h1 {
+      text-align: center;
+      color: #f00;
+    }
+    .search-box {
+      width: 100%;
+      max-width: 500px;
+      margin: 1rem auto;
+      display: flex;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px 0 0 8px;
+    }
+    .search-box button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background: #f00;
+      border: none;
+      color: white;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+    }
+    .profile-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .profile {
+      background: #222;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    }
+    .profile h3 {
+      margin-top: 0;
+      color: #f00;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Business Profile Templates</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search for Doctor, Restaurant, Salon...">
+    <button onclick="searchProfiles()">Search</button>
+  </div>
+
+  <div class="profile-list" id="profileList">
+    <!-- Profiles will be injected here -->
+  </div>
+
+  <script>
+    const profiles = [
+      {
+        title: "Doctor",
+        content: "Provides health check-ups, consultancy, medicine services, 20 patients daily, 50% profit margin, GST registered."
+      },
+      {
+        title: "Dentist",
+        content: "Offers root canal, wisdom tooth removal, cleaning, 2 employees, 50% profit, GST No: Available."
+      },
+      {
+        title: "Restaurant",
+        content: "Serves veg & non-veg food, 80+ daily customers, sitting for 120, 30 employees, 50% margin."
+      },
+      {
+        title: "Gym",
+        content: "Provides personal training, muscle gain, diet plans, 1200 clients, 4 trainers, 40% margin."
+      },
+      {
+        title: "Lawyer",
+        content: "Handles civil, family, documentation cases; 70+ active cases, 2 employees, 50% profit."
+      },
+      {
+        title: "Beauty Parlour",
+        content: "Offers makeup, hair styling, facials; 65% profit; 8 employees; service for locals."
+      },
+      {
+        title: "Freelancer",
+        content: "Works in software dev & tech consulting, charges per project, global clients, 80% profit."
+      },
+      {
+        title: "Event Management",
+        content: "Provides wedding, birthday, corporate events, 26 employees, 60% profit, variable charges."
+      }
+    ];
+
+    const profileList = document.getElementById("profileList");
+
+    function renderProfiles(data) {
+      profileList.innerHTML = "";
+      data.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "profile";
+        div.innerHTML = `<h3>${p.title}</h3><p>${p.content}</p>`;
+        profileList.appendChild(div);
+      });
+    }
+
+    function searchProfiles() {
+      const keyword = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = profiles.filter(p =>
+        p.title.toLowerCase().includes(keyword) ||
+        p.content.toLowerCase().includes(keyword)
+      );
+      renderProfiles(filtered);
+    }
+
+    // Render all on first load
+    renderProfiles(profiles);
+  </script>
+</body>
+</html>
